@@ -7,7 +7,7 @@ void mirror(char *s)
 	/* TODO */
 	char aux;
 	int nr = strlen(s); 
-	int i = 0;
+	unsigned int i = 0;
 
 	while (i != (strlen(s) >> 1)) {
 		aux = *(s + i);
@@ -22,7 +22,7 @@ int main()
 {
 	/* TODO: Test function */
 	char *s = malloc(100 * sizeof(char));
-	strcpy(s, "asdfghjl");
+	strcpy(s, "qwerty");
 	mirror(s);
 	return 0;
 }

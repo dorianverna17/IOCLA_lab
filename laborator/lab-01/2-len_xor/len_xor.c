@@ -14,10 +14,13 @@ int my_strlen(const char *str)
 void equality_check(const char *str)
 {
 	/* TODO */
-	int i;
+	int i, n;
 
 	for(i = 0; i < my_strlen(str); i++) {
-		if ((*(str + i)) ^ (*(str + i + (1 << i)))) {
+		n = i + (1 << i);
+		if (n >= my_strlen(str))
+			n = n % my_strlen(str);
+		if ((*(str + i)) ^ (*(str + n))) {
 			continue;
 		} else {
 			printf("Adresa of %c: %p\n",*(str + i) , str + i);
@@ -28,8 +31,8 @@ void equality_check(const char *str)
 int main(void)
 {
 	/* TODO: Test functions */
-	char s[4];
-	strcpy(s, "aac");
+	char s[30];
+	strcpy(s, "ababababacccbacbacbacbacbabc");
 	printf("%d\n", my_strlen(s));
 	equality_check(s);
 	return 0;
