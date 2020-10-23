@@ -37,11 +37,13 @@ int main() {
     }
     printf("\n");
 
-    // ptr = &v;
-    // printf("%d %d\n", v + sizeof(v), ptr);
-    // while (ptr < v + sizeof(v)) {
-    // 	printf("%p -> 0x%x\n", ptr, *ptr);
-    // 	ptr++;
-    // }
+    ptr = &v;
+    // adunarea unui întreg n la un pointer p (p + n)
+    // reprezintă de fapt p + n * sizeof(*p)
+    printf("%d %d\n", v + (sizeof(v) / sizeof(*v)), v);
+    while (ptr < v + (sizeof(v) / sizeof(*v))) {
+    	printf("%p -> 0x%x\n", ptr, *ptr);
+    	ptr++;
+    }
     return 0;
 }

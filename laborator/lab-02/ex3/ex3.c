@@ -5,6 +5,8 @@
 #include <time.h>
 #include "pixel.h"
 
+#define GET_PIXEL(a, i ,j) (*(*(a + i) + j))
+
 /*
 	TODO a
 	Functia primeste ca parametru o imagine si intoarce imaginea rasturnata.
@@ -15,7 +17,6 @@
 
 void reversePic(Picture *pic) {
 	int i, n = pic->height;
-	printf("%d\n", n);
 	Pixel *ptr;
 
 	for (i = 0; i < n / 2; i++) {
@@ -37,12 +38,11 @@ void reversePic(Picture *pic) {
 
 void colorToGray(Picture *pic) {
 	int i, j;
-
 	for (i = 0; i < pic->height; i++) {
 		for (j = 0; j < pic->width; j++) {
-			(*(*(pic->pix_array + j) + i)).R = 0.3 * (*(*(pic->pix_array + j) + i)).R;
-			(*(*(pic->pix_array + j) + i)).G = 0.59 * (*(*(pic->pix_array + j) + i)).G;
-			(*(*(pic->pix_array + j) + i)).B = 0.11 * (*(*(pic->pix_array + j) + i)).B;  
+			(*(*(pic->pix_array + i) + j)).R = 0.3 * (*(*(pic->pix_array + i) + j)).R;
+			(*(*(pic->pix_array + i) + j)).G = 0.59 * (*(*(pic->pix_array + i) + j)).G;
+			(*(*(pic->pix_array + i) + j)).B = 0.11 * (*(*(pic->pix_array + i) + j)).B;	
 		}
 	}
 }
@@ -63,7 +63,6 @@ int main() {
 	Pixel **pix_array = generatePixelArray(height, width);
 	Picture *pic = generatePicture(height, width, pix_array);
 
-	// printf("da");
 	printPicture(pic);
 	reversePic(pic);
 	printf("\n");
@@ -71,7 +70,7 @@ int main() {
 	printf("\n");
 	colorToGray(pic);
 	printPicture(pic);
-	// printf("nu\n");
+
 	freePicture(&pic);
 	freePixelArray(&pix_array, height, width);
 	return 0;
