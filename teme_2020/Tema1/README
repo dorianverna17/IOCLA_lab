@@ -1,0 +1,83 @@
+Verna Dorian-Alexandru, grupa 324CC
+Tema 1 IOCLA
+
+La tema folosesc ca idee un string in care adaug caracterele din sirul
+format, iar atunci cand intalnesc o structura de tipul %d, atunci citesc
+argumentul sub forma de int si il adaug in sir (caracter cu caracter).
+In mod similar procedez si la hexa, string, char, unsigned. La sfarsit
+printez sirul format cu ajutorul functiei write_stdout. La fiecare
+introducere de caracter in string incrementez dimensiunea acestuia.
+
+Tema am implementat-o folosind mai multe functii:
+1)	write_stdout - Functia data deja in fisier
+2)  print_integer - Functie utilizata pentru a printa un integer. Daca
+integerul este dat ca fiind negativ atunci adaug un caracter '-' la
+stringul pe care o sa il printez la sfarsit si fac integer-ul pozitiv.
+Apoi memorez int-ul intr-un unsigned si procedez la fel ca la functia
+de la unsigned(print_unsigned) - sparg numarul unsigned in cifre, cifre
+pe care le adaug intr-un vector. Cifrele numarului vor fi stocate in
+ordine inversa in vector, motiv pentru care trebuie sa fac o parcurgere
+de la finalul vectorului la inceputul sau pentru a introduce elementele
+acestuia in ordinea corespunzatoare in string-ul pe care o sa il printez
+la sfarsit.
+3)  print_unsigned - functia realizeaza ceea ce am prezentat si la
+print_integer cu exceptia ca nu mai fac printarea semnului '-', deoarece
+cand obtin valoarea numarului unsigned care trebuie printat o obtin
+intr-o variabila de tip unsigned int, care este pozitiv. Dupa accea fac
+acelasi lucru ca la functia precedenta (pun cifrele numarului unsigned
+intr-un vector, iar mai apoi pun elementele vectorului in string-ul pe
+care il voi printa in functia iocla_printf).
+4)  print_hex - functia print_hex stocheaza valoarea care doreste a fi
+printata intr-o variabila de tip unsigned int. Indiferent daca numarul
+este stocat ca int sau ca unsigned int (indiferent daca este negativ sau
+este pozitiv), reprezentarea in hexazecimal va fi acceasi. Dupa ce stochez
+numarul ca unsigned int (ca sa il am intotdeauna pozitiv), fac o transformare
+a numarului pozitiv din zecimal in hexa. Astfel, intr-un while fac impartiri
+repetate la 16 si in functie de restul impartirii formez un vector cu
+valorile 0-9 sau a-b. Practic, stochez in vector restul sub forma de
+caracter. Ca la functiile anterioare, ordinea caracterelor din vector
+va fi inversa decat cea reala (decat cea a formei reale a numarului in
+hexazecimal), motiv pentru care trebuie sa fac o parcurgere inversa a
+vecotrului pentru a adauga elementele in vector.
+5)  print_char - funtia stocheaza intr-un int codul ASCII al caracterului
+ce reprezinta argumentul, apoi il adauga in sirul pe care doresc sa il
+printez la sfarsit
+6)  print_string - functia stocheaza intr-un char* string-ul ce reprezinta
+argumentul ce trebuie printat. Apoi adaug pe rand, intr-un for, fiecare
+caracter din string-ul dat de va_arg in string-ul final.
+7)  iocla_printf - in aceasta functie parcurg sirul format intr-un for.
+In cadrul for-ului am mai multe blocuri if - doua mai mici (in primul
+verific daca un caracter nu este precedat de %, caz in care printez acel
+caracter, iar in cel de-al doilea, daca am o secventa para de '%'
+consecutive atunci inseamna ca deja am printat caracterele %, iar ceea ce
+urmeaza dupa nu se considera ca ar trebui considerat argument, caz in care
+se adauga caracterul dat ca atare) si unul mai mare, in care se intra doar
+daca caracterul curent este de tip procent - in acest bloc se verifica in
+primul rand daca procentul este urmat de alte caractere de acest fel. Aceste
+caractere % le numar intr-un while, iar daca am o secventa de caractere %
+para atunci doar adaug in sirul de printat jumatate din acel numar par de
+caractere procent si nu iau in considerare ultimul procent daca ar putea
+fi urmat de un caracter de tipul d,u,x,s,c, caz in care printez caracterul
+care urmeaza dupa acel %. Daca am un numar impar de procente, atunci printez
+(numarul - 1) / 2 caractere procent, iar ultimul procent il folosesc pentru
+a vedea ce tip de argument trebuie printat. Apoi folosesc instructiunea goto
+pentru a ma intoarce la inceputul instructiunilor din cadrul for-ului,
+deoarece atunci cand verific cate procente am in secventa incrementez i-ul.
+Celelalte if-uri din blocul if mare din for apeleaza functiile de printare
+integer, char, hexa, string sau unsigned dupa caz.
+Aceste functii primesc ca parametrii sirul pe care il folosesc in write_stdout,
+numarul de caractere al sirului (care se incrementeaza) si lista de argumente.
+Apoi ies din for si adaug terminatorul la sfarsitul sirului de printat, facand
+si o verificare asupra penultimului element al sirului format (daca este %,
+atunci pun doar terminatorul de sir, altfel adaug in sir ultimul element al
+sirului format si apoi adaug terminatorul). Urmeaza sa apelez functia
+write_stdout cu sirul out_string si strlen(out_string) ca parametrii, out_string
+fiind sirul de printat. De asemenea, returnez si lungimea sirului de printat.
+
+Tema mi-a luat aproximativ o zi sa o fac.
+Nu a fost o tema foarte grea. A fost ok si consider ca am avut ce sa invat din ea.
+Felicitari pentru tema data si keep up the good work!
+
+
+
+
